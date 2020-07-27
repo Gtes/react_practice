@@ -1,26 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import UserOutput from "./UserOutput/UserOutput";
+import UserInput from "./UserInput/UserInput";
+
+import "./UserOutput/UserOutput.css"
+import "./UserInput/UserInput.css"
+
+import "./App.css";
+
+const App = (props) => {
+    const [userData, setUserData] = useState({
+        users: [{ name: "Max" }, { name: "Boris" }],
+    });
+
+    const changeUserName = (event) => {
+        setUserData({
+            users: [{ name: event.target.value }, { name: "Boris" }],
+        });
+    };
+
+    return (
+        <div className="usersCards">
+            <UserOutput userName={userData.users[0].name}>
+                <UserInput
+                    userName={userData.users[0].name}
+                    changed={changeUserName}
+                ></UserInput>
+            </UserOutput>
+            <UserOutput userName={userData.users[1].name}>
+                <UserInput userName={userData.users[1].name}></UserInput>
+            </UserOutput>
+        </div>
+    );
+};
 
 export default App;
