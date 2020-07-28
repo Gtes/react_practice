@@ -4,7 +4,6 @@ const userOutput = (props) => {
     return (
         <div className="UserOutput">
             <span>{props.userName}</span>
-            {props.children}
             <p>
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Itaque
                 iure sequi eum officia officiis! Atque illum eos architecto.

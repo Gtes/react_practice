@@ -1,9 +1,6 @@
 .UserOutput {
-    margin: 10px auto;
     padding: 16px;
     border: 1px solid #eeeeee;
     box-shadow: 0 2px 3px #ccc;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
+    /* max-width: 400px; */
 }
