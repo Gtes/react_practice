@@ -7,9 +7,9 @@ import Person from "./Person/Person";
 const App = (props) => {
     const [personsState, setPersonsState] = useState({
         persons: [
-            {id:'id_1', name: "Max", age: 30 },
-            {id:'id_2', name: "Manu", age: 30 },
-            {id:'id_3', name: "Stephanie", age: 90 },
+            { id: "id_1", name: "Max", age: 30 },
+            { id: "id_2", name: "Manu", age: 30 },
+            { id: "id_3", name: "Stephanie", age: 90 },
         ],
         showPersons: false,
     });
@@ -30,14 +30,24 @@ const App = (props) => {
         });
     };
 
-    const nameChangedHandler = (event) => {
+    const nameChangedHandler = (event, id) => {
+        const personIndex = personsState.persons.findIndex(
+            (element) => element.id === id
+        );
+
+        const person = {
+            ...personsState.persons[personIndex],
+        };
+
+        person.name = event.target.value;
+
+        const persons = [...personsState.persons];
+
+        persons[personIndex] = person;
+
         setPersonsState({
             ...personsState,
-            persons: [
-                { name: "Max", age: 30 },
-                { name: event.target.value, age: 40 },
-                { name: "Stephanie", age: 90 },
-            ],
+            persons: persons,
         });
     };
 
@@ -76,11 +86,14 @@ const App = (props) => {
             <div>
                 {personsState.persons.map((person, index) => {
                     return (
-                        <Person 
+                        <Person
                             click={() => deletePersonHandler(index)}
                             name={person.name}
                             age={person.age}
                             key={person.id}
+                            changed={(event) =>
+                                nameChangedHandler(event, person.id)
+                            }
                         />
                     );
                 })}
