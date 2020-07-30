@@ -31,8 +31,6 @@ const App = (props) => {
     };
 
     const nameChangedHandler = (event) => {
-        // console.log(event);
-
         setPersonsState({
             ...personsState,
             persons: [
@@ -51,9 +49,11 @@ const App = (props) => {
         cursor: "pointer",
     };
 
-    const deletePersonHandler = (index) => {
-        const persons = personsState.persons;
-        persons.splice(index, 1);
+    const deletePersonHandler = (personIndex) => {
+        const persons = [...personsState.persons];
+
+        persons.splice(personIndex, 1);
+
         setPersonsState({
             ...personsState,
             persons: persons,
@@ -67,8 +67,6 @@ const App = (props) => {
             ...personsState,
             showPersons: !doesShow,
         });
-
-        // console.log(personsState);
     };
 
     let persons = null;
@@ -87,7 +85,6 @@ const App = (props) => {
                 })}
             </div>
         );
-        console.log(persons);
     }
 
     return (
