@@ -51,6 +51,15 @@ const App = (props) => {
         cursor: "pointer",
     };
 
+    const deletePersonHandler = (index) => {
+        const persons = personsState.persons;
+        persons.splice(index, 1);
+        setPersonsState({
+            ...personsState,
+            persons: persons,
+        });
+    };
+
     const togglePersonsHandler = () => {
         const doesShow = personsState.showPersons;
 
@@ -67,12 +76,18 @@ const App = (props) => {
     if (personsState.showPersons) {
         persons = (
             <div>
-                {personsState.persons.map((person) => {
-                    return <Person name={person.name} age={person.age} />;
+                {personsState.persons.map((person, index) => {
+                    return (
+                        <Person
+                            click={() => deletePersonHandler(index)}
+                            name={person.name}
+                            age={person.age}
+                        />
+                    );
                 })}
             </div>
         );
-        console.log(persons)
+        console.log(persons);
     }
 
     return (
