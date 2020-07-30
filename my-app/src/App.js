@@ -62,6 +62,31 @@ const App = (props) => {
         console.log(personsState);
     };
 
+    let persons = null;
+
+    if (personsState.showPersons) {
+        persons = (
+            <div>
+                <Person
+                    name={personsState.persons[0].name}
+                    age={personsState.persons[0].age}
+                >
+                    My Hobbies: Racing
+                </Person>
+                <Person
+                    name={personsState.persons[1].name}
+                    age={personsState.persons[1].age}
+                    click={switchNameHandler.bind(this, "Tesion222")}
+                    changed={nameChangedHandler}
+                ></Person>
+                <Person
+                    name={personsState.persons[2].name}
+                    age={personsState.persons[2].age}
+                ></Person>
+            </div>
+        );
+    }
+
     return (
         <div className="App">
             <header className="App-header">
@@ -69,26 +94,7 @@ const App = (props) => {
                 <button style={style} onClick={togglePersonsHandler}>
                     Switch Name
                 </button>
-                {personsState.showPersons ? (
-                    <div>
-                        <Person
-                            name={personsState.persons[0].name}
-                            age={personsState.persons[0].age}
-                        >
-                            My Hobbies: Racing
-                        </Person>
-                        <Person
-                            name={personsState.persons[1].name}
-                            age={personsState.persons[1].age}
-                            click={switchNameHandler.bind(this, "Tesion222")}
-                            changed={nameChangedHandler}
-                        ></Person>
-                        <Person
-                            name={personsState.persons[2].name}
-                            age={personsState.persons[2].age}
-                        ></Person>
-                    </div>
-                ) : null}
+                {persons}
             </header>
         </div>
     );
