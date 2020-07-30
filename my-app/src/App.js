@@ -16,8 +16,8 @@ const App = (props) => {
 
     const [otherState, setOtherState] = useState("sdfljhslhglashglkhg");
 
-    console.log(personsState);
-    console.log("updated");
+    // console.log(personsState);
+    // console.log("updated");
 
     const switchNameHandler = (newName) => {
         setPersonsState({
@@ -59,7 +59,7 @@ const App = (props) => {
             showPersons: !doesShow,
         });
 
-        console.log(personsState);
+        // console.log(personsState);
     };
 
     let persons = null;
@@ -67,24 +67,12 @@ const App = (props) => {
     if (personsState.showPersons) {
         persons = (
             <div>
-                <Person
-                    name={personsState.persons[0].name}
-                    age={personsState.persons[0].age}
-                >
-                    My Hobbies: Racing
-                </Person>
-                <Person
-                    name={personsState.persons[1].name}
-                    age={personsState.persons[1].age}
-                    click={switchNameHandler.bind(this, "Tesion222")}
-                    changed={nameChangedHandler}
-                ></Person>
-                <Person
-                    name={personsState.persons[2].name}
-                    age={personsState.persons[2].age}
-                ></Person>
+                {personsState.persons.map((person) => {
+                    return <Person name={person.name} age={person.age} />;
+                })}
             </div>
         );
+        console.log(persons)
     }
 
     return (
