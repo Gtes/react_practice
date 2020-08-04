@@ -31,26 +31,33 @@ const App = (props) => {
     };
 
     const nameChangedHandler = (event, id) => {
+        // Find person by id
         const personIndex = personsState.persons.findIndex(
             (element) => element.id === id
         );
 
+        // get person by personIndex
         const person = {
             ...personsState.persons[personIndex],
         };
 
+        // change person name based on input value onChange
         person.name = event.target.value;
 
+        // copy personsState
         const persons = [...personsState.persons];
 
+        // chnage person in cpied personsState
         persons[personIndex] = person;
 
+        //set new state with copied persons
         setPersonsState({
             ...personsState,
             persons: persons,
         });
     };
 
+    // Button styles
     const style = {
         backgroundColor: "white",
         font: "inherit",
@@ -60,6 +67,7 @@ const App = (props) => {
     };
 
     const deletePersonHandler = (personIndex) => {
+        // copy personsState
         const persons = [...personsState.persons];
 
         persons.splice(personIndex, 1);
@@ -104,9 +112,9 @@ const App = (props) => {
     return (
         <div className="App">
             <header className="App-header">
-                <h1>Hellow World!</h1>
+                <h1>List of Users</h1>
                 <button style={style} onClick={togglePersonsHandler}>
-                    Switch Name
+                    Toggle Users
                 </button>
                 {persons}
             </header>
