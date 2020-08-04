@@ -3,9 +3,19 @@ import React, { useState } from "react";
 import "./App.css";
 
 const App = (props) => {
+    const [inputLengthState, setInputLength] = useState(0);
+
+    const inputChanged = (event) => {
+        const inputLength = event.target.value.length;
+
+        setInputLength(inputLength);
+    };
 
     return (
         <div className="App">
+            <input type="text" onChange={inputChanged} placeholder="input text please"/>
+
+            <p>{inputLengthState}</p>
 
         </div>
     );
