@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import ValidationComponent from "./ValidationComponent/ValidationComponent";
+
 import "./App.css";
 
 const App = (props) => {
@@ -17,6 +19,9 @@ const App = (props) => {
 
             <p>{inputLengthState}</p>
 
+            <p>
+                <ValidationComponent length={inputLengthState} />
+            </p>
         </div>
     );
 };
