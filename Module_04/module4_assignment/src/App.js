@@ -6,9 +6,8 @@ import CharComponent from "./CharComponent/CharComponent";
 import "./App.css";
 
 const App = (props) => {
-    const [inputLengthState, setInputLength] = useState(0);
-    const [charsState, setChars] = useState([]);
     const [stringState, setString] = useState("");
+    const [charsState, setChars] = useState([]);
 
     const generateUniqueArray = (event) => {
         setChars([...new Set(event.target.value.split(""))]);
@@ -27,12 +26,21 @@ const App = (props) => {
     };
 
     const inputChanged = (event) => {
-        const inputLength = event.target.value.length;
-
-        setInputLength(inputLength);
         setString(event.target.value);
         generateUniqueArray(event);
     };
+
+    const charList = charsState.map((char, index) => {
+        return (
+            <CharComponent
+                click={() => {
+                    deleteCharacter(char);
+                }}
+                name={char}
+                key={char}
+            />
+        );
+    });
 
     return (
         <div className="App">
@@ -43,25 +51,13 @@ const App = (props) => {
                 value={stringState}
             />
 
-            <p>{inputLengthState}</p>
+            <p>{stringState}</p>
 
             <p>
-                <ValidationComponent length={inputLengthState} />
+                <ValidationComponent length={stringState.length} />
             </p>
 
-            <div>
-                {charsState.map((char, index) => {
-                    return (
-                        <CharComponent
-                            click={() => {
-                                deleteCharacter(char);
-                            }}
-                            name={char}
-                            key={char}
-                        />
-                    );
-                })}
-            </div>
+            {charList}
         </div>
     );
 };
