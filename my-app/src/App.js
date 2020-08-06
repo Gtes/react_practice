@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Radium, { StyleRoot } from "radium";
 
 import "./App.css";
 
@@ -131,21 +130,19 @@ const App = (props) => {
     }
 
     return (
-        <StyleRoot>
-            <div className="App">
-                <header className="App-header">
-                    <h1>List of Users</h1>
-                    <p className={classes.join(" ")}>This is realy works</p>
-                    <button style={style} onClick={togglePersonsHandler}>
-                        Toggle Users
-                    </button>
-                    {persons}
-                </header>
-            </div>
-        </StyleRoot>
+        <div className="App">
+            <header className="App-header">
+                <h1>List of Users</h1>
+                <p className={classes.join(" ")}>This is realy works</p>
+                <button style={style} onClick={togglePersonsHandler}>
+                    Toggle Users
+                </button>
+                {persons}
+            </header>
+        </div>
     );
 
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi how are you?'))
 };
 
-export default Radium(App);
+export default App;
