@@ -60,7 +60,7 @@ const App = (props) => {
     // Button styles
     const style = {
         backgroundColor: "white",
-        font: "inherit",
+        font: "in herit",
         border: "1px solid blue",
         padding: "8px",
         cursor: "pointer",
@@ -107,6 +107,8 @@ const App = (props) => {
                 })}
             </div>
         );
+
+        style.backgroundColor = "red";
     }
 
     return (
