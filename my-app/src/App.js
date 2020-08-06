@@ -1,8 +1,22 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 
 import "./App.css";
 
 import Person from "./Person/Person";
+
+const StyledButton = styled.button`
+background-color: white;
+font: inherit;
+border: 1px solid blue;
+padding: 8px;
+cursor: pointer;
+
+&:hover {
+    background-color: lightgreen;
+    color: black;
+}
+`;
 
 const App = (props) => {
     const [personsState, setPersonsState] = useState({
@@ -134,9 +148,9 @@ const App = (props) => {
             <header className="App-header">
                 <h1>List of Users</h1>
                 <p className={classes.join(" ")}>This is realy works</p>
-                <button style={style} onClick={togglePersonsHandler}>
+                <StyledButton onClick={togglePersonsHandler}>
                     Toggle Users
-                </button>
+                </StyledButton>
                 {persons}
             </header>
         </div>
