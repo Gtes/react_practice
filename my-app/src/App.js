@@ -111,10 +111,21 @@ const App = (props) => {
         style.backgroundColor = "red";
     }
 
+    const classes = []; 
+
+    if (personsState.persons.length <= 2){
+        classes.push('red');
+    }
+
+    if (personsState.persons.length <= 1){
+        classes.push('bold');
+    }
+
     return (
         <div className="App">
             <header className="App-header">
                 <h1>List of Users</h1>
+                <p className={classes.join(' ')}>This is realy works</p>
                 <button style={style} onClick={togglePersonsHandler}>
                     Toggle Users
                 </button>
