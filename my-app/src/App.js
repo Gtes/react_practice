@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Radium from 'radium';
+import Radium, { StyleRoot } from "radium";
 
 import "./App.css";
 
@@ -65,10 +65,10 @@ const App = (props) => {
         border: "1px solid blue",
         padding: "8px",
         cursor: "pointer",
-        ':hover': {
-            backgroundColor: 'lightgreen',
-            color: 'black'
-        }
+        ":hover": {
+            backgroundColor: "lightgreen",
+            color: "black",
+        },
     };
 
     const deletePersonHandler = (personIndex) => {
@@ -114,33 +114,35 @@ const App = (props) => {
         );
 
         style.backgroundColor = "red";
-        style[':hover']= {
-            backgroundColor: 'black',
-            color: 'white'
-        }
+        style[":hover"] = {
+            backgroundColor: "black",
+            color: "white",
+        };
     }
 
-    const classes = []; 
+    const classes = [];
 
-    if (personsState.persons.length <= 2){
-        classes.push('red');
+    if (personsState.persons.length <= 2) {
+        classes.push("red");
     }
 
-    if (personsState.persons.length <= 1){
-        classes.push('bold');
+    if (personsState.persons.length <= 1) {
+        classes.push("bold");
     }
 
     return (
-        <div className="App">
-            <header className="App-header">
-                <h1>List of Users</h1>
-                <p className={classes.join(' ')}>This is realy works</p>
-                <button style={style} onClick={togglePersonsHandler}>
-                    Toggle Users
-                </button>
-                {persons}
-            </header>
-        </div>
+        <StyleRoot>
+            <div className="App">
+                <header className="App-header">
+                    <h1>List of Users</h1>
+                    <p className={classes.join(" ")}>This is realy works</p>
+                    <button style={style} onClick={togglePersonsHandler}>
+                        Toggle Users
+                    </button>
+                    {persons}
+                </header>
+            </div>
+        </StyleRoot>
     );
 
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi how are you?'))
