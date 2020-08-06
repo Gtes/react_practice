@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Radium from 'radium';
 
 import "./App.css";
 
@@ -64,6 +65,10 @@ const App = (props) => {
         border: "1px solid blue",
         padding: "8px",
         cursor: "pointer",
+        ':hover': {
+            backgroundColor: 'lightgreen',
+            color: 'black'
+        }
     };
 
     const deletePersonHandler = (personIndex) => {
@@ -109,6 +114,10 @@ const App = (props) => {
         );
 
         style.backgroundColor = "red";
+        style[':hover']= {
+            backgroundColor: 'black',
+            color: 'white'
+        }
     }
 
     const classes = []; 
@@ -137,4 +146,4 @@ const App = (props) => {
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi how are you?'))
 };
 
-export default App;
+export default Radium(App);
