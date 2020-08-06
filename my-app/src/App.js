@@ -6,7 +6,7 @@ import "./App.css";
 import Person from "./Person/Person";
 
 const StyledButton = styled.button`
-background-color: white;
+background-color: ${props => props.altStyle ? 'red' : 'green'};
 font: inherit;
 border: 1px solid blue;
 padding: 8px;
@@ -126,11 +126,11 @@ const App = (props) => {
             </div>
         );
 
-        style.backgroundColor = "red";
-        style[":hover"] = {
-            backgroundColor: "black",
-            color: "white",
-        };
+        // style.backgroundColor = "red";
+        // style[":hover"] = {
+        //     backgroundColor: "black",
+        //     color: "white",
+        // };
     }
 
     const classes = [];
@@ -148,7 +148,7 @@ const App = (props) => {
             <header className="App-header">
                 <h1>List of Users</h1>
                 <p className={classes.join(" ")}>This is realy works</p>
-                <StyledButton onClick={togglePersonsHandler}>
+                <StyledButton altStyle={personsState.showPersons} onClick={togglePersonsHandler}>
                     Toggle Users
                 </StyledButton>
                 {persons}
