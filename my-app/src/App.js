@@ -1,22 +1,7 @@
 import React, { useState } from "react";
-import styled from "styled-components";
-
-import "./App.css";
+import classes from "./App.module.css";
 
 import Person from "./Person/Person";
-
-const StyledButton = styled.button`
-background-color: ${props => props.altStyle ? 'red' : 'green'};
-font: inherit;
-border: 1px solid blue;
-padding: 8px;
-cursor: pointer;
-
-&:hover {
-    background-color: lightgreen;
-    color: black;
-}
-`;
 
 const App = (props) => {
     const [personsState, setPersonsState] = useState({
@@ -29,9 +14,6 @@ const App = (props) => {
     });
 
     const [otherState, setOtherState] = useState("sdfljhslhglashglkhg");
-
-    // console.log(personsState);
-    // console.log("updated");
 
     const switchNameHandler = (newName) => {
         setPersonsState({
@@ -72,17 +54,8 @@ const App = (props) => {
     };
 
     // Button styles
-    const style = {
-        backgroundColor: "white",
-        font: "in herit",
-        border: "1px solid blue",
-        padding: "8px",
-        cursor: "pointer",
-        ":hover": {
-            backgroundColor: "lightgreen",
-            color: "black",
-        },
-    };
+    let arePersons = null;
+    let btnClass = "";
 
     const deletePersonHandler = (personIndex) => {
         // copy personsState
@@ -126,31 +99,27 @@ const App = (props) => {
             </div>
         );
 
-        // style.backgroundColor = "red";
-        // style[":hover"] = {
-        //     backgroundColor: "black",
-        //     color: "white",
-        // };
+        btnClass = classes.Red;
     }
 
-    const classes = [];
+    const addedClasses = [];
 
     if (personsState.persons.length <= 2) {
-        classes.push("red");
+        addedClasses.push(classes.red);
     }
 
     if (personsState.persons.length <= 1) {
-        classes.push("bold");
+        addedClasses.push(classes.bold);
     }
 
     return (
-        <div className="App">
-            <header className="App-header">
+        <div className={classes.App}>
+            <header>
                 <h1>List of Users</h1>
-                <p className={classes.join(" ")}>This is realy works</p>
-                <StyledButton altStyle={personsState.showPersons} onClick={togglePersonsHandler}>
+                <p className={addedClasses.join(" ")}>This is realy works</p>
+                <button className={btnClass} onClick={togglePersonsHandler}>
                     Toggle Users
-                </StyledButton>
+                </button>
                 {persons}
             </header>
         </div>
