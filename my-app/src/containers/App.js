@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import classes from "./App.module.css";
+import Persons from "../components/Persons/Persons";
 
-import Person from "../components/Persons/Person/Person";
+import Cockpit from "../components/Persons/Cockpit/Cockpit";
 
 const App = (props) => {
     const [personsState, setPersonsState] = useState({
@@ -12,19 +13,6 @@ const App = (props) => {
         ],
         showPersons: false,
     });
-
-    const [otherState, setOtherState] = useState("sdfljhslhglashglkhg");
-
-    const switchNameHandler = (newName) => {
-        setPersonsState({
-            ...personsState,
-            persons: [
-                { name: "Max", age: 30 },
-                { name: newName, age: 30 },
-                { name: "Stephanie", age: 90 },
-            ],
-        });
-    };
 
     const nameChangedHandler = (event, id) => {
         // Find person by id
@@ -53,14 +41,11 @@ const App = (props) => {
         });
     };
 
-    // Button styles
-    let arePersons = null;
-    let btnClass = "";
-
     const deletePersonHandler = (personIndex) => {
         // copy personsState
         const persons = [...personsState.persons];
 
+        //remove person by personIndex
         persons.splice(personIndex, 1);
 
         setPersonsState({
@@ -82,50 +67,24 @@ const App = (props) => {
 
     if (personsState.showPersons) {
         persons = (
-            <div>
-                {personsState.persons.map((person, index) => {
-                    return (
-                        <Person
-                            click={() => deletePersonHandler(index)}
-                            name={person.name}
-                            age={person.age}
-                            key={person.id}
-                            changed={(event) =>
-                                nameChangedHandler(event, person.id)
-                            }
-                        />
-                    );
-                })}
-            </div>
+            <Persons
+                clicked={deletePersonHandler}
+                persons={personsState.persons}
+                changed={nameChangedHandler}
+            ></Persons>
         );
-
-        btnClass = classes.Red;
-    }
-
-    const addedClasses = [];
-
-    if (personsState.persons.length <= 2) {
-        addedClasses.push(classes.red);
-    }
-
-    if (personsState.persons.length <= 1) {
-        addedClasses.push(classes.bold);
     }
 
     return (
         <div className={classes.App}>
-            <header>
-                <h1>List of Users</h1>
-                <p className={addedClasses.join(" ")}>This is realy works</p>
-                <button className={btnClass} onClick={togglePersonsHandler}>
-                    Toggle Users
-                </button>
-                {persons}
-            </header>
+            <Cockpit
+                showPersons={personsState.showPersons}
+                persons={personsState.persons}
+                clicked={() => togglePersonsHandler()}
+            ></Cockpit>
+            {persons}
         </div>
     );
-
-    // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi how are you?'))
 };
 
 export default App;
