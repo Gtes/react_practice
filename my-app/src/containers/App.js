@@ -4,87 +4,84 @@ import Persons from "../components/Persons/Persons";
 
 import Cockpit from "../components/Persons/Cockpit/Cockpit";
 
-const App = (props) => {
-    const [personsState, setPersonsState] = useState({
+class App extends React.Component {
+    state = {
         persons: [
             { id: "id_1", name: "Max", age: 30 },
             { id: "id_2", name: "Manu", age: 30 },
             { id: "id_3", name: "Stephanie", age: 90 },
         ],
         showPersons: false,
-    });
+    };
 
-    const nameChangedHandler = (event, id) => {
+    nameChangedHandler = (event, id) => {
         // Find person by id
-        const personIndex = personsState.persons.findIndex(
+        const personIndex = this.state.persons.findIndex(
             (element) => element.id === id
         );
 
         // get person by personIndex
         const person = {
-            ...personsState.persons[personIndex],
+            ...this.state.persons[personIndex],
         };
 
         // change person name based on input value onChange
         person.name = event.target.value;
 
         // copy personsState
-        const persons = [...personsState.persons];
+        const persons = [...this.state.persons];
 
         // chnage person in cpied personsState
         persons[personIndex] = person;
 
         //set new state with copied persons
-        setPersonsState({
-            ...personsState,
+        this.setState({
             persons: persons,
         });
     };
 
-    const deletePersonHandler = (personIndex) => {
+    deletePersonHandler = (personIndex) => {
         // copy personsState
-        const persons = [...personsState.persons];
+        const persons = [...this.state.persons];
 
         //remove person by personIndex
         persons.splice(personIndex, 1);
 
-        setPersonsState({
-            ...personsState,
+        this.setState({
             persons: persons,
         });
     };
 
-    const togglePersonsHandler = () => {
-        const doesShow = personsState.showPersons;
+    togglePersonsHandler = () => {
+        const doesShow = this.state.showPersons;
 
-        setPersonsState({
-            ...personsState,
+        this.setState({
             showPersons: !doesShow,
         });
     };
+    render() {
+        let persons = null;
 
-    let persons = null;
-
-    if (personsState.showPersons) {
-        persons = (
-            <Persons
-                clicked={deletePersonHandler}
-                persons={personsState.persons}
-                changed={nameChangedHandler}
-            ></Persons>
+        if (this.state.showPersons) {
+            persons = (
+                <Persons
+                    clicked={this.deletePersonHandler}
+                    persons={this.state.persons}
+                    changed={this.nameChangedHandler}
+                ></Persons>
+            );
+        }
+        return (
+            <div className={classes.App}>
+                <Cockpit
+                    showPersons={this.state.persons.showPersons}
+                    persons={this.state.persons}
+                    clicked={() => this.togglePersonsHandler()}
+                ></Cockpit>
+                {persons}
+            </div>
         );
     }
-
-    return (
-        <div className={classes.App}>
-            <Cockpit
-                showPersons={personsState.showPersons}
-                persons={personsState.persons}
-                clicked={() => togglePersonsHandler()}
-            ></Cockpit>
-            {persons}
-        </div>
-    );
-};
+}
 
 export default App;
