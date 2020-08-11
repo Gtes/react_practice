@@ -5,6 +5,11 @@ import Persons from "../components/Persons/Persons";
 import Cockpit from "../components/Persons/Cockpit/Cockpit";
 
 class App extends React.Component {
+    constructor(props) {
+        super(props);
+        console.log("[App.sj] constructor");
+    }
+
     state = {
         persons: [
             { id: "id_1", name: "Max", age: 30 },
@@ -13,6 +18,15 @@ class App extends React.Component {
         ],
         showPersons: false,
     };
+
+    static getDerivedStateFromProps(props, state) {
+        console.log('[App.js] getDerivedStateFromProps', props)
+        return state;
+    }
+
+    componentDidMount(){
+        console.log('[App.sj] mounted')
+    }
 
     nameChangedHandler = (event, id) => {
         // Find person by id
@@ -60,6 +74,7 @@ class App extends React.Component {
         });
     };
     render() {
+        console.log('[App.js] render')
         let persons = null;
 
         if (this.state.showPersons) {
