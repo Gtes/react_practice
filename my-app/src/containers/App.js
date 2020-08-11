@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import classes from "./App.module.css";
 import Persons from "../components/Persons/Persons";
 
 import Cockpit from "../components/Persons/Cockpit/Cockpit";
 
-class App extends React.Component {
+class App extends Component {
     constructor(props) {
         super(props);
         console.log("[App.sj] constructor");
@@ -25,7 +25,7 @@ class App extends React.Component {
     }
 
     componentDidMount(){
-        console.log('[App.sj] mounted')
+        console.log('[App.sj] componentDidMount')
     }
 
     nameChangedHandler = (event, id) => {
