@@ -8,8 +8,20 @@ const Cockpit = (props) => {
         setTimeout(() => {
             alert("saved data to cloud");
         }, 1000);
-    }, [props.persons]);
 
+        return()=>{
+            console.log('[Cockpit.js] cleanup in useEffect')
+        }
+    }, []);
+
+    useEffect(()=>{
+        console.log('[Cockpit.js] 2nd useEffect')
+
+        return ()=>{
+            console.log('[Cockpit.js] cleanup in 2nd useEffect')
+        }
+    })
+  
     const addedClasses = [];
     let btnClass = "";
 
