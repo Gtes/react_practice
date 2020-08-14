@@ -7,6 +7,14 @@ import withClass from "../../../hoc/withClass";
 import classes from "./Person.module.css";
 
 class Person extends Component {
+    constructor(props) {
+        super()
+        this.inputElementRef = React.createRef();
+    }
+    componentDidMount() {
+        this.inputElementRef.current.focus();
+    }
+
     render() {
         console.log("[Person.js] rendering...");
         return (
@@ -19,6 +27,10 @@ class Person extends Component {
                 {/* <p>{props.children}</p> */}
                 <input
                     type="text"
+                    // ref={(inputEl) => {
+                    //     this.inputElement = inputEl;
+                    // }}
+                    ref={this.inputElementRef}
                     onChange={this.props.changed}
                     defaultValue={this.props.name}
                 />
@@ -31,6 +43,6 @@ Person.propTypes = {
     click: PropTypes.func,
     name: PropTypes.string,
     age: PropTypes.number,
-    changed: PropTypes.func
+    changed: PropTypes.func,
 };
 export default withClass(Person, classes.Person);
