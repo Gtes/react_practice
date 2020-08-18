@@ -1,28 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import classes from "./Cockpit.module.css";
 
 const Cockpit = (props) => {
+    const toggleBtnRef = useRef(null);
+
     useEffect(() => {
         console.log("[Cockpit.js] useEffect");
 
-        const timer = setTimeout(() => {
-            alert("saved data to cloud");
-        }, 1000);
+        toggleBtnRef.current.click();
 
-        return()=>{
-            clearTimeout(timer)
-            console.log('[Cockpit.js] cleanup in useEffect')
-        }
+        return () => {
+            console.log("[Cockpit.js] cleanup in useEffect");
+        };
     }, []);
 
-    useEffect(()=>{
-        console.log('[Cockpit.js] 2nd useEffect')
+    useEffect(() => {
+        console.log("[Cockpit.js] 2nd useEffect");
 
-        return ()=>{
-            console.log('[Cockpit.js] cleanup in 2nd useEffect')
-        }
-    })
-  
+        return () => {
+            console.log("[Cockpit.js] cleanup in 2nd useEffect");
+        };
+    });
+
     const addedClasses = [];
     let btnClass = "";
 
@@ -42,7 +41,9 @@ const Cockpit = (props) => {
         <div className={classes.Cockpit}>
             <h1>List of Users</h1>
             <p className={addedClasses.join(" ")}>This is realy works</p>
-            <button className={btnClass} onClick={props.clicked}>
+            <button 
+            ref={toggleBtnRef}
+            className={btnClass} onClick={props.clicked}>
                 Toggle Users
             </button>
         </div>
