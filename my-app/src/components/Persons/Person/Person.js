@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Aux from "../../../hoc/Aux";
 
+import AuthContext from "../../../context/auth-context";
+
 import withClass from "../../../hoc/withClass";
 
 import classes from "./Person.module.css";
 
 class Person extends Component {
     constructor(props) {
-        super()
+        super();
         this.inputElementRef = React.createRef();
     }
     componentDidMount() {
@@ -21,7 +23,16 @@ class Person extends Component {
             // <div className={classes.Person}>
 
             <Aux>
-                {this.props.isAuth?<p>Authenticated</p> : <p>Please Log In</p>}
+                <AuthContext.Consumer>
+                    {(context) =>
+                        context.authenticated ? (
+                            <p>Authenticated</p>
+                        ) : (
+                            <p>Please Log In</p>
+                        )
+                    }
+                </AuthContext.Consumer>
+
                 <p onClick={this.props.click}>
                     I'm {this.props.name} and I am {this.props.age} years old!
                 </p>
