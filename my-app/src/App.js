@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-
-import "./App.css";
+import classes from "./App.module.css";
 
 import Person from "./Person/Person";
 
@@ -15,9 +14,6 @@ const App = (props) => {
     });
 
     const [otherState, setOtherState] = useState("sdfljhslhglashglkhg");
-
-    // console.log(personsState);
-    // console.log("updated");
 
     const switchNameHandler = (newName) => {
         setPersonsState({
@@ -58,13 +54,8 @@ const App = (props) => {
     };
 
     // Button styles
-    const style = {
-        backgroundColor: "white",
-        font: "inherit",
-        border: "1px solid blue",
-        padding: "8px",
-        cursor: "pointer",
-    };
+    let arePersons = null;
+    let btnClass = "";
 
     const deletePersonHandler = (personIndex) => {
         // copy personsState
@@ -107,13 +98,26 @@ const App = (props) => {
                 })}
             </div>
         );
+
+        btnClass = classes.Red;
+    }
+
+    const addedClasses = [];
+
+    if (personsState.persons.length <= 2) {
+        addedClasses.push(classes.red);
+    }
+
+    if (personsState.persons.length <= 1) {
+        addedClasses.push(classes.bold);
     }
 
     return (
-        <div className="App">
-            <header className="App-header">
+        <div className={classes.App}>
+            <header>
                 <h1>List of Users</h1>
-                <button style={style} onClick={togglePersonsHandler}>
+                <p className={addedClasses.join(" ")}>This is realy works</p>
+                <button className={btnClass} onClick={togglePersonsHandler}>
                     Toggle Users
                 </button>
                 {persons}
